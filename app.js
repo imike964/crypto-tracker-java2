@@ -1,6 +1,14 @@
 "use strict";
 
-//URLs
+// const generateCryptoCoin = (coin) =>
+//   `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
+
+// const btcPriceURL = generateCryptoCoin("bitcoin");
+
+// const cryptos = ['bitcoin', 'ethereum']
+
+// cryptos.forEach(crypto => generateCryptoCoin(crypto))
+// URLs;
 const btcPriceURL =
   "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd";
 const ethPriceURL =
@@ -66,8 +74,6 @@ const polygonTradesButton = document.getElementById("tablinks-polygon");
 
 const tabContent = document.querySelectorAll(".tabcontent");
 
-const myarray = [1, 2, 3, 4, 5, 6];
-
 const handleTabs = (displayCryptoTab) => {
   //I did this:
   // for (var i = 0; i < tabContent.length; i++) {
@@ -81,92 +87,78 @@ const handleTabs = (displayCryptoTab) => {
 
   displayCryptoTab.style.display = "block";
 };
-console.log(tabContent);
-// function handleTabs(displayCryptoTab, hideCryptoTab) {
+
+// const handleTabs = (displayCryptoTab, hideCryptoTab) => {
 //   displayCryptoTab.style.display = "block";
 //   hideCryptoTab.style.display = "none";
-//   return true;
 // }
 
 ethereumTradesButton.addEventListener("click", () =>
   handleTabs(ethereumTrades)
 );
+
 bitcoinTradesButton.addEventListener("click", () => handleTabs(bitcoinTrades));
 nearTradesButton.addEventListener("click", () => handleTabs(nearTrades));
 polygonTradesButton.addEventListener("click", () => handleTabs(polygonTrades));
-// fetch(url + qstring).then(function (response) {
-//   return console.log(response.json().data);
-// });
-
-// .then(function (data) {
-//   return console.log(data);
-// });
-
-const myHeaders = new Headers();
-myHeaders.append("accept", "application/json");
-
-const myInit = {
-  Headers: myHeaders,
-};
 
 const fetchData = async () => {
   //BTC
-  const btcResponse = await fetch(btcPriceURL, myInit);
+  const btcResponse = await fetch(btcPriceURL);
   const btcData = await btcResponse.json();
   //ETH
-  const ethResponse = await fetch(ethPriceURL, myInit);
+  const ethResponse = await fetch(ethPriceURL);
   const ethData = await ethResponse.json();
   //Near
-  const nearResponse = await fetch(nearPriceURL, myInit);
+  const nearResponse = await fetch(nearPriceURL);
   const nearData = await nearResponse.json();
   //Fantom
-  const ftmResponse = await fetch(fantomPriceURL, myInit);
+  const ftmResponse = await fetch(fantomPriceURL);
   const ftmData = await ftmResponse.json();
   //Ripple
-  const xrpResponse = await fetch(ripplePriceURL, myInit);
+  const xrpResponse = await fetch(ripplePriceURL);
   const xrpdata = await xrpResponse.json();
   //Nexo
-  const nexoResponse = await fetch(nexoPriceURL, myInit);
+  const nexoResponse = await fetch(nexoPriceURL);
   const nexoData = await nexoResponse.json();
   //Cardano
-  const cardanoResponse = await fetch(cardanoPriceURL, myInit);
+  const cardanoResponse = await fetch(cardanoPriceURL);
   const cardanoData = await cardanoResponse.json();
   //Chainlink
-  const chainlinkResponse = await fetch(chainlinkPriceURL, myInit);
+  const chainlinkResponse = await fetch(chainlinkPriceURL);
   const chainlinkData = await chainlinkResponse.json();
   //Arweave
-  const arweaveResponse = await fetch(arweavePriceURL, myInit);
+  const arweaveResponse = await fetch(arweavePriceURL);
   const arweaveData = await arweaveResponse.json();
   //Filecoin
-  const filecoinResponse = await fetch(filecoinPriceURL, myInit);
+  const filecoinResponse = await fetch(filecoinPriceURL);
   const filecoinData = await filecoinResponse.json();
   //Polkadot
-  const polkadotResponse = await fetch(polkadotPriceURL, myInit);
+  const polkadotResponse = await fetch(polkadotPriceURL);
   const polkadotData = await polkadotResponse.json();
   //Solana
-  const solanaResponse = await fetch(solanaPriceURL, myInit);
+  const solanaResponse = await fetch(solanaPriceURL);
   const solanaData = await solanaResponse.json();
   //Gala
-  const galaResponse = await fetch(galaPriceURL, myInit);
+  const galaResponse = await fetch(galaPriceURL);
   const galaData = await galaResponse.json();
   //ImmutableX
-  const imxResponse = await fetch(immutablexPriceURL, myInit);
+  const imxResponse = await fetch(immutablexPriceURL);
   const imxData = await imxResponse.json();
 
-  let btcUSDPrice = "$" + btcData.bitcoin.usd;
-  let ethUSDPrice = "$" + ethData.ethereum.usd;
-  let nearUSDPrice = "$" + nearData.near.usd;
-  let nexoUSDPrice = "$" + nexoData.nexo.usd;
-  let ftmUSDPrice = "$" + ftmData.fantom.usd;
-  let xrpUSDPrice = "$" + xrpdata.ripple.usd;
-  let cardanoUSDPrice = "$" + cardanoData.cardano.usd;
-  let chainlinkUSDPrice = "$" + chainlinkData.chainlink.usd;
-  let arweaveUSDPrice = "$" + arweaveData.arweave.usd;
-  let filecoinUSDPrice = "$" + filecoinData.filecoin.usd;
-  let polkadotUSDPrice = "$" + polkadotData.polkadot.usd;
-  let solanaUSDPrice = "$" + solanaData.solana.usd;
-  let galaUSDPrice = "$" + galaData.gala.usd;
-  let imxUSDPrice = "$" + imxData["immutable-x"].usd;
+  const btcUSDPrice = "$" + btcData.bitcoin.usd;
+  const ethUSDPrice = "$" + ethData.ethereum.usd;
+  const nearUSDPrice = "$" + nearData.near.usd;
+  const nexoUSDPrice = "$" + nexoData.nexo.usd;
+  const ftmUSDPrice = "$" + ftmData.fantom.usd;
+  const xrpUSDPrice = "$" + xrpdata.ripple.usd;
+  const cardanoUSDPrice = "$" + cardanoData.cardano.usd;
+  const chainlinkUSDPrice = "$" + chainlinkData.chainlink.usd;
+  const arweaveUSDPrice = "$" + arweaveData.arweave.usd;
+  const filecoinUSDPrice = "$" + filecoinData.filecoin.usd;
+  const polkadotUSDPrice = "$" + polkadotData.polkadot.usd;
+  const solanaUSDPrice = "$" + solanaData.solana.usd;
+  const galaUSDPrice = "$" + galaData.gala.usd;
+  const imxUSDPrice = "$" + imxData["immutable-x"].usd;
 
   bitcoinCurrentPrice.innerText = btcUSDPrice;
   ethereumCurrentPrice.innerText = ethUSDPrice;
@@ -184,18 +176,3 @@ const fetchData = async () => {
   immutablexCurrentPrice.innerText = imxUSDPrice;
 };
 fetchData();
-
-//Tabs Section
-
-// function myFunction() {
-//   var i, tabcontent, tablinks;
-
-//   tabcontent = document.getElementsByClassName("tabcontent");
-//   for (i = 0; i < tabcontent.length; i++) {
-//     tabcontent[i].style.display = "none";
-//   }
-
-//   tablinks = document.getElementsByClassName("tablinks");
-//   for (i = 0; i < tablinks.length; i++) {
-//     tablinks[i].className = tablinks[i].className.replace("active", "");
-//   }
