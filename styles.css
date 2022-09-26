@@ -32,13 +32,13 @@ body {
   padding-bottom: 4rem;
 }
 
-.tab {
+.trades-tab {
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
 }
 
-.tab button {
+.trades-tab button {
   background-color: inherit;
   float: left;
   border: none;
@@ -71,7 +71,11 @@ li a:hover {
   background-color: #111;
 }
 
-.tab button:hover {
+.tabs-links {
+  text-transform: capitalize;
+}
+
+.trades-tab button:hover {
   background-color: #ddd;
 }
 
@@ -103,8 +107,4 @@ li a:hover {
 
 .styled-table tbody tr:last-of-type {
   border-bottom: 2px solid #009879;
-}
-
-.tabcontent {
-  display: none;
 }

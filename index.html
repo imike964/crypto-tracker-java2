@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Crypto Tracker</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
   </head>
   <body>
-    <!-- Header section with nav -->
     <header class="header">
       <img
         src="/assets/crypto-banner.jpg"
@@ -22,7 +22,6 @@
         </ul>
       </nav>
     </header>
-    <!-- main content -->
     <main>
       <h1 class="center-text">Crypto Tracker</h1>
       <h2 class="center-text">Price Tracker</h2>
@@ -37,247 +36,30 @@
             <th>Profit</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Bitcoin</td>
-            <td>BTC</td>
-            <td id="bitcoin-current-price">234234</td>
-            <td>500</td>
-            <td>1234</td>
-            <td>-10000</td>
-          </tr>
-          <tr>
-            <td>Ethereum</td>
-            <td>ETH</td>
-            <td id="ethereum-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Near Protocol</td>
-            <td>NEAR</td>
-            <td id="near-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Fantom</td>
-            <td>FTM</td>
-            <td id="ftm-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Ripple</td>
-            <td>XRP</td>
-            <td id="XRP-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>ChainLink</td>
-            <td>LINK</td>
-            <td id="chainlink-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Cardano</td>
-            <td>ADA</td>
-            <td id="cardano-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Nexo</td>
-            <td>NEXO</td>
-            <td id="nexo-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Arweave</td>
-            <td>AR</td>
-            <td id="arweave-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Filecoin</td>
-            <td>FIL</td>
-            <td id="filecoin-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Polygon</td>
-            <td>MATIC</td>
-            <td id="matic-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Polkadot</td>
-            <td>DOT</td>
-            <td id="polkadot-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Solana</td>
-            <td>SOL</td>
-            <td id="solana-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Gala</td>
-            <td>GALA</td>
-            <td id="gala-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>Immutable-x</td>
-            <td>IMX</td>
-            <td id="immutable-x-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-          <tr>
-            <td>AAVE</td>
-            <td>AAVE</td>
-            <td id="aave-current-price">12344</td>
-            <td>5</td>
-            <td>1234</td>
-            <td>-500</td>
-          </tr>
-        </tbody>
+        <tbody class="table-row"></tbody>
       </table>
       <div>
         <div class="trades">
-          <div class="tab">
-            <button id="tablinks-bitcoin">Bitcoin</button>
-            <button id="tablinks-ethereum">Ethereum</button>
-            <button id="tablinks-nearprotocol">Near Protocol</button>
-            <button id="tablinks-polygon">Polygon</button>
-          </div>
+          <div class="trades-tab"></div>
         </div>
-        <div id="bitcoin_trades" class="tabcontent">
-          <h3>Bitcoin</h3>
+        <div class="tab-table">
+          <h3 class="center-text tabcontent-heading"></h3>
           <table class="styled-table">
-            <tr>
-              <th>Current Price</th>
-              <th>Exchange</th>
-              <th>Price Bought At</th>
-              <th>Amount</th>
-              <th>Profit</th>
-            </tr>
-            <tr>
-              <td>5000</td>
-              <td>CoinBase</td>
-              <td>21440.67</td>
-              <td>0.00134482</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>5000</td>
-              <td>CoinBase</td>
-              <td>19,339.89</td>
-              <td>0.00147191</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>5000</td>
-              <td>Ledger</td>
-              <td>23,226.00</td>
-              <td>0.00107638</td>
-              <td>0</td>
-            </tr>
-            <tr>
-              <td>5000</td>
-              <td>CoinBase</td>
-              <td>23,515.80</td>
-              <td>0.03873991</td>
-              <td>0</td>
-            </tr>
-          </table>
-        </div>
-
-        <div id="ethereum_trades" class="tabcontent">
-          <h3>Ethereum</h3>
-          <table>
-            <tr>
-              <th>Current Price</th>
-              <th>Exchange</th>
-              <th>Price Bought At</th>
-              <th>Amount</th>
-              <th>Profit</th>
-            </tr>
-            <tr>
-              <td id="">>5000</td>
-              <td>CoinBase</td>
-              <td>210000</td>
-              <td>0.5</td>
-              <td>-5000</td>
-            </tr>
-          </table>
-        </div>
-        <div id="near_trades" class="tabcontent">
-          <h3>Near Protocol</h3>
-          <table>
-            <tr>
-              <th>Current Price</th>
-              <th>Exchange</th>
-              <th>Price Bought At</th>
-              <th>Amount</th>
-              <th>Profit</th>
-            </tr>
-            <tr>
-              <td>456456</td>
-              <td>CoinBase</td>
-              <td>210000</td>
-              <td>0.5</td>
-              <td>-5000</td>
-            </tr>
-          </table>
-        </div>
-
-        <div id="polygon_trades" class="tabcontent">
-          <h3>Polygon</h3>
-          <table>
-            <tr>
-              <th>Current Price</th>
-              <th>Exchange</th>
-              <th>Price Bought At</th>
-              <th>Amount</th>
-              <th>Profit</th>
-            </tr>
-            <tr>
-              <td>456456</td>
-              <td>CoinBase</td>
-              <td>210000</td>
-              <td>0.5</td>
-              <td>-5000</td>
-            </tr>
+            <thead>
+              <tr>
+                <th>Current Price</th>
+                <th>Exchange</th>
+                <th>Price Bought At</th>
+                <th>Amount</th>
+                <th>Profit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="tab-table-body"></tr>
+            </tbody>
           </table>
         </div>
       </div>
     </main>
-    <script src="app.js"></script>
   </body>
 </html>

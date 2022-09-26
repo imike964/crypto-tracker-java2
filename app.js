@@ -1,178 +1,79 @@
 "use strict";
 
-// const generateCryptoCoin = (coin) =>
-//   `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=usd`;
+const tableRow = document.querySelector(".table-row");
+const tradesTab = document.querySelector(".trades-tab");
+const tabHeading = document.querySelector(".tabcontent-heading");
+const tabBody = document.querySelector(".tab-table-body");
+const tabTable = document.querySelector(".tab-table");
 
-// const btcPriceURL = generateCryptoCoin("bitcoin");
+tabTable.style.display = "none";
 
-// const cryptos = ['bitcoin', 'ethereum']
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
 
-// cryptos.forEach(crypto => generateCryptoCoin(crypto))
-// URLs;
-const btcPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd";
-const ethPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd";
-const nearPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=near&vs_currencies=usd";
-const nexoPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=nexo&vs_currencies=usd";
-const cardanoPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=usd";
-const fantomPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=fantom&vs_currencies=usd";
-const ripplePriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd";
-const chainlinkPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=chainlink&vs_currencies=usd";
-const arweavePriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=arweave&vs_currencies=usd";
-const filecoinPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=filecoin&vs_currencies=usd";
-const polygonPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=polygon&vs_currencies=usd";
-const polkadotPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=polkadot&vs_currencies=usd";
-const solanaPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd";
-const galaPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=gala&vs_currencies=usd";
-const immutablexPriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=immutable-x&vs_currencies=usd";
-const aavePriceURL =
-  "https://api.coingecko.com/api/v3/simple/price?ids=aave&vs_currencies=usd";
-//Tie to document ID
-const bitcoinCurrentPrice = document.getElementById("bitcoin-current-price");
-const ethereumCurrentPrice = document.getElementById("ethereum-current-price");
-const NearCurrentPrice = document.getElementById("near-current-price");
-const XRPCurrentPrice = document.getElementById("XRP-current-price");
-const nexoCurrentPrice = document.getElementById("nexo-current-price");
-const cardanoCurrentPrice = document.getElementById("cardano-current-price");
-const fantomCurrentPrice = document.getElementById("ftm-current-price");
-const chainlinkCurrentPrice = document.getElementById(
-  "chainlink-current-price"
-);
-const arweaveCurrentPrice = document.getElementById("arweave-current-price");
-const filecoinCurrentPrice = document.getElementById("filecoin-current-price");
-const polkadotCurrentPrice = document.getElementById("polkadot-current-price");
-const solanaCurrentPrice = document.getElementById("solana-current-price");
-const galaCurrentPrice = document.getElementById("gala-current-price");
-const immutablexCurrentPrice = document.getElementById(
-  "immutable-x-current-price"
-);
+const generateCryptoUrl = (coin) =>
+  `https://api.coingecko.com/api/v3/coins/${coin}`;
 
-const bitcoinTrades = document.getElementById("bitcoin_trades");
-const ethereumTrades = document.getElementById("ethereum_trades");
-const nearTrades = document.getElementById("near_trades");
-// const testTrades = document.getElementsByClassName("tabcontent")[0 - 2];
-const polygonTrades = document.getElementById("polygon_trades");
+const cryptos = [
+  "bitcoin",
+  "ethereum",
+  "near",
+  "nexo",
+  "cardano",
+  "fantom",
+  "chainlink",
+  "ripple",
+  "arweave",
+  "filecoin",
+  "polkadot",
+  "solana",
+  "gala",
+  "immutable",
+  "aave",
+];
 
-const bitcoinTradesButton = document.getElementById("tablinks-bitcoin");
-const ethereumTradesButton = document.getElementById("tablinks-ethereum");
-const nearTradesButton = document.getElementById("tablinks-nearprotocol");
-const polygonTradesButton = document.getElementById("tablinks-polygon");
+const cryptoLinks = cryptos.map((crypto) => generateCryptoUrl(crypto));
 
-const tabContent = document.querySelectorAll(".tabcontent");
-
-const handleTabs = (displayCryptoTab) => {
-  //I did this:
-  // for (var i = 0; i < tabContent.length; i++) {
-  //   tabContent[i].style.display = "none";
-  // }
-
-  tabContent.forEach((tab) => {
-    console.log(tab);
-    tab.style.display = "none";
+const getCrypto = Promise.all(
+  cryptoLinks.map(async (cryptoLink) => {
+    const response = await fetch(cryptoLink);
+    return response.json();
+  })
+).then((cryptoData) => {
+  cryptoData.forEach((crypto) => {
+    tableRow.innerHTML += `<tr>
+        <td>${crypto.name}</td>
+        <td>${crypto.symbol}</td>
+        <td>${formatter.format(crypto.market_data.current_price.usd)}</td>
+        <td>500</td>
+        <td>1234</td>
+        <td>-10000</td>
+      </tr>`;
   });
+});
 
-  displayCryptoTab.style.display = "block";
-};
-
-// const handleTabs = (displayCryptoTab, hideCryptoTab) => {
-//   displayCryptoTab.style.display = "block";
-//   hideCryptoTab.style.display = "none";
-// }
-
-ethereumTradesButton.addEventListener("click", () =>
-  handleTabs(ethereumTrades)
+cryptos.forEach(
+  (crypto) =>
+    (tradesTab.innerHTML += `<button class='tabs-links'>${crypto}</button>`)
 );
 
-bitcoinTradesButton.addEventListener("click", () => handleTabs(bitcoinTrades));
-nearTradesButton.addEventListener("click", () => handleTabs(nearTrades));
-polygonTradesButton.addEventListener("click", () => handleTabs(polygonTrades));
+const tabLinks = document.querySelectorAll(".tabs-links");
 
-const fetchData = async () => {
-  //BTC
-  const btcResponse = await fetch(btcPriceURL);
-  const btcData = await btcResponse.json();
-  //ETH
-  const ethResponse = await fetch(ethPriceURL);
-  const ethData = await ethResponse.json();
-  //Near
-  const nearResponse = await fetch(nearPriceURL);
-  const nearData = await nearResponse.json();
-  //Fantom
-  const ftmResponse = await fetch(fantomPriceURL);
-  const ftmData = await ftmResponse.json();
-  //Ripple
-  const xrpResponse = await fetch(ripplePriceURL);
-  const xrpdata = await xrpResponse.json();
-  //Nexo
-  const nexoResponse = await fetch(nexoPriceURL);
-  const nexoData = await nexoResponse.json();
-  //Cardano
-  const cardanoResponse = await fetch(cardanoPriceURL);
-  const cardanoData = await cardanoResponse.json();
-  //Chainlink
-  const chainlinkResponse = await fetch(chainlinkPriceURL);
-  const chainlinkData = await chainlinkResponse.json();
-  //Arweave
-  const arweaveResponse = await fetch(arweavePriceURL);
-  const arweaveData = await arweaveResponse.json();
-  //Filecoin
-  const filecoinResponse = await fetch(filecoinPriceURL);
-  const filecoinData = await filecoinResponse.json();
-  //Polkadot
-  const polkadotResponse = await fetch(polkadotPriceURL);
-  const polkadotData = await polkadotResponse.json();
-  //Solana
-  const solanaResponse = await fetch(solanaPriceURL);
-  const solanaData = await solanaResponse.json();
-  //Gala
-  const galaResponse = await fetch(galaPriceURL);
-  const galaData = await galaResponse.json();
-  //ImmutableX
-  const imxResponse = await fetch(immutablexPriceURL);
-  const imxData = await imxResponse.json();
-
-  const btcUSDPrice = "$" + btcData.bitcoin.usd;
-  const ethUSDPrice = "$" + ethData.ethereum.usd;
-  const nearUSDPrice = "$" + nearData.near.usd;
-  const nexoUSDPrice = "$" + nexoData.nexo.usd;
-  const ftmUSDPrice = "$" + ftmData.fantom.usd;
-  const xrpUSDPrice = "$" + xrpdata.ripple.usd;
-  const cardanoUSDPrice = "$" + cardanoData.cardano.usd;
-  const chainlinkUSDPrice = "$" + chainlinkData.chainlink.usd;
-  const arweaveUSDPrice = "$" + arweaveData.arweave.usd;
-  const filecoinUSDPrice = "$" + filecoinData.filecoin.usd;
-  const polkadotUSDPrice = "$" + polkadotData.polkadot.usd;
-  const solanaUSDPrice = "$" + solanaData.solana.usd;
-  const galaUSDPrice = "$" + galaData.gala.usd;
-  const imxUSDPrice = "$" + imxData["immutable-x"].usd;
-
-  bitcoinCurrentPrice.innerText = btcUSDPrice;
-  ethereumCurrentPrice.innerText = ethUSDPrice;
-  NearCurrentPrice.innerText = nearUSDPrice;
-  fantomCurrentPrice.innerText = ftmUSDPrice;
-  nexoCurrentPrice.innerText = nexoUSDPrice;
-  XRPCurrentPrice.innerText = xrpUSDPrice;
-  cardanoCurrentPrice.innerText = cardanoUSDPrice;
-  chainlinkCurrentPrice.innerText = chainlinkUSDPrice;
-  arweaveCurrentPrice.innerText = arweaveUSDPrice;
-  filecoinCurrentPrice.innerText = filecoinUSDPrice;
-  polkadotCurrentPrice.innerText = polkadotUSDPrice;
-  solanaCurrentPrice.innerText = solanaUSDPrice;
-  galaCurrentPrice.innerText = galaUSDPrice;
-  immutablexCurrentPrice.innerText = imxUSDPrice;
-};
-fetchData();
+tabLinks.forEach((tabLink) => {
+  tabLink.addEventListener("click", async () => {
+    const crypto = generateCryptoUrl(tabLink.innerText.toLowerCase());
+    const response = await fetch(crypto);
+    const data = await response.json();
+    tabTable.style.display = "block";
+    tabHeading.innerText = `${data.name}`;
+    tabBody.innerHTML = ` <td>${formatter.format(
+      data.market_data.current_price.usd
+    )}</td>
+    <td>CoinBase</td>
+    <td>21440.67</td>
+    <td>0.00134482</td>
+    <td>0</td>`;
+  });
+});
